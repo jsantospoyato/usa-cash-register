@@ -26,8 +26,10 @@ function checkCashRegister(price, cash, cid) {
 
     // First check if the founds are insuficcient or closed
     let due = getRegister(cid) - diff;
-    if (due == 0) return { status: "CLOSED", change: [...cid] };
-    if (due < 0) return insu;
+    if (due == 0) 
+        return { status: "CLOSED", change: [...cid] };
+    if (due < 0)
+        return insu;
 
     // If there are enough funds, then we proceed to return
     return getChange(cid, diff);
@@ -65,7 +67,8 @@ function getChange(cid, diff) {
         };
 
         // If what's due is 0, this means we can give it back
-        if (diff == 0) return { status: "OPEN", change: exchange };
+        if (diff == 0)
+            return { status: "OPEN", change: exchange };
     }
 
     // If we didnt send the change back at this points, we dont have proper units to do so
@@ -91,3 +94,11 @@ function getUnits(cid, i, diff) {
     sb[1] /= 100;
     return [sb, diff];
 }
+
+// Examples of execution
+console.log(
+    checkCashRegister(100, 276.5, [
+        ["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 2.1], ["QUARTER", 1.75], 
+        ["ONE", 10], ["FIVE", 15], ["TEN", 20], ["TWENTY", 80], ["ONE HUNDRED", 200]
+    ])
+);
